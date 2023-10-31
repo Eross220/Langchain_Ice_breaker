@@ -5,9 +5,9 @@ from langchain.chains import LLMChain
 from third_parties.linkedin import scrape_linkedin_profile
 from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 from third_parties.linkedin import scrape_linkedin_profile
+from outputpaser import person_inetel_parser
 
-
-if __name__ == '__main__':
+def ice_breaker(name:str)-> str:
     print("Hello Langchain!!")
 
     linkedin_profile_url = linkedin_lookup_agent(name="Alexius xie")
@@ -15,10 +15,11 @@ if __name__ == '__main__':
         given the Linkedin information {information} about a person from I want you to create:
         1.a short summary
         2.two interesting facts about them
+        \n\ {format_instruction}
     """
 
 
-    summmary_prompt= PromptTemplate(input_variables=["information"], template=summmary_template )
+    summmary_prompt= PromptTemplate(input_variables=["information"], template=summmary_template, partial_variables={"format_instruction":person_inetel_parser.get_format_instructions()} )
 
     llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
 
@@ -30,4 +31,9 @@ if __name__ == '__main__':
     
     respons_llm=chain.run(information=linkedin_data)
 
-    print(respons_llm)
+    return respons_llm
+
+if __name__ == '__main__':
+    result=ice_breaker("Harrison Chase")
+
+    print(result)

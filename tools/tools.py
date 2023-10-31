@@ -46,7 +46,6 @@ class CustomSerpAPIWrapper(SerpAPIWrapper):
 def get_profile_url(text:str) -> str:
    
     SERPAPI_API_KEY= os.getenv('SERPAPI_API_KEY')
-    print("linkedin lookup")
     search = CustomSerpAPIWrapper(serpapi_api_key=SERPAPI_API_KEY)
     
     result = search.run(f"{text}")
