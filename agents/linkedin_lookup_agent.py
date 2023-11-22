@@ -34,5 +34,5 @@ def lookup(name: str) -> str:
 
 
     linked_profile_url= agent.run(prompt_template.format_prompt(name_of_person=name))
-    
+        
     return linked_profile_url

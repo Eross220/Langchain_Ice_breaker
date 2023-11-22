@@ -10,7 +10,10 @@ from outputpaser import person_inetel_parser
 def ice_breaker(name:str)-> str:
     print("Hello Langchain!!")
 
-    linkedin_profile_url = linkedin_lookup_agent(name="Alexius xie")
+    linkedin_profile_url = linkedin_lookup_agent(name=name)
+
+    linkedin_data= scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
+
     summmary_template= """
         given the Linkedin information {information} about a person from I want you to create:
         1.a short summary
@@ -25,15 +28,13 @@ def ice_breaker(name:str)-> str:
 
     chain = LLMChain(llm=llm, prompt=summmary_prompt)
 
-    
 
-    linkedin_data= scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
     
     respons_llm=chain.run(information=linkedin_data)
 
     return respons_llm
 
 if __name__ == '__main__':
-    result=ice_breaker("Harrison Chase")
+    result=ice_breaker("Alexius xie")
 
     print(result)

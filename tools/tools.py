@@ -50,5 +50,5 @@ def get_profile_url(text:str) -> str:
     
     result = search.run(f"{text}")
     
-    print(result)
+    print("google search result:",result)
     return result
